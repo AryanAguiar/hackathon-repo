@@ -18,6 +18,14 @@ export const registerUser = async (req, res) => {
             return res.status(400).json({ message: "User already exist" });
         }
 
+        //check if account id is taken
+        if (accounts && accounts.length > 0) {
+            for (const acc of accounts) {
+                const exists = await User.findOne({ "accounts.accountId": acc.accountId });
+                if (exists) return res.status(400).json({ message: `Account ID ${acc.accountId} already exists` });
+            }
+        }
+
         //create user
         const newUser = await User.create({
             name, email, password, accounts: accounts || []

@@ -1,0 +1,12 @@
+[
+  { "type": "income", "category": "freelance", "amount": 2500, "description": "Website design payment" },
+  { "type": "income", "category": "salary", "amount": 50000, "description": "Monthly salary" },
+  { "type": "expense", "category": "groceries", "amount": 800, "description": "Grocery shopping" },
+  { "type": "expense", "category": "entertainment", "amount": 1200, "description": "Movie tickets" },
+  { "type": "expense", "category": "utilities", "amount": 1500, "description": "Electricity bill" },
+  { "type": "expense", "category": "subscriptions", "amount": 299, "description": "Netflix subscription" },
+  { "type": "income", "category": "investment", "amount": 1000, "description": "Stock dividends" },
+  { "type": "expense", "category": "transport", "amount": 400, "description": "Fuel" },
+  { "type": "expense", "category": "health", "amount": 1200, "description": "Pharmacy purchases" },
+  { "type": "income", "category": "gift", "amount": 500, "description": "Birthday gift from friend" }
+]
