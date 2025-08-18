@@ -1,0 +1,8 @@
+to run backend:
+cd backend then:
+npm run dev
+
+to run seeder:
+cd backend then:
+node dataSeeder.js
+seeder just adds 50 random transactions in accounts that are empty, accounts with 1 or more transactions are skipped.
