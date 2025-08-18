@@ -1,8 +1,8 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
-
+import { seedTransactionsForUser } from "../dataSeeder.js";
+import Transaction from "../models/Transaction.js";
 // @desc    Register new user
-// @route   POST /api/users/register
 export const registerUser = async (req, res) => {
     try {
         const { name, email, password, accounts } = req.body;
@@ -31,6 +31,8 @@ export const registerUser = async (req, res) => {
             name, email, password, accounts: accounts || []
         });
 
+        await seedTransactionsForUser(newUser);
+
         //generate jwt
         const token = jwt.sign(
             { id: newUser._id },
@@ -51,7 +53,6 @@ export const registerUser = async (req, res) => {
 };
 
 //@desc Login
-//@route POST/ /api/users/login
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -92,7 +93,7 @@ export const loginUser = async (req, res) => {
     }
 };
 
-//add account
+//@desc add account
 export const addAccount = async (req, res) => {
     try {
         const { id } = req.params;
@@ -121,6 +122,29 @@ export const addAccount = async (req, res) => {
         await user.save();
 
         res.status(201).json({ message: "Account added successfully", accounts: user.accounts });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+//@desc delete user
+export const deleteUser = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        //find user
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        //delete transactions
+        await Transaction.deleteMany({ user: userId });
+
+        //delete user
+        await User.findByIdAndDelete(userId);
+
+        res.status(200).json({ message: "User and all linked transactions deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

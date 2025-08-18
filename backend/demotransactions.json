@@ -1,12 +1,147 @@
 [
-  { "type": "income", "category": "freelance", "amount": 2500, "description": "Website design payment" },
-  { "type": "income", "category": "salary", "amount": 50000, "description": "Monthly salary" },
-  { "type": "expense", "category": "groceries", "amount": 800, "description": "Grocery shopping" },
-  { "type": "expense", "category": "entertainment", "amount": 1200, "description": "Movie tickets" },
-  { "type": "expense", "category": "utilities", "amount": 1500, "description": "Electricity bill" },
-  { "type": "expense", "category": "subscriptions", "amount": 299, "description": "Netflix subscription" },
-  { "type": "income", "category": "investment", "amount": 1000, "description": "Stock dividends" },
-  { "type": "expense", "category": "transport", "amount": 400, "description": "Fuel" },
-  { "type": "expense", "category": "health", "amount": 1200, "description": "Pharmacy purchases" },
-  { "type": "income", "category": "gift", "amount": 500, "description": "Birthday gift from friend" }
+  {
+    "type": "CREDIT",
+    "amount": 50000,
+    "description": "NEFT-SALARY AUG 2025 HDFC BANK LTD"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 2500,
+    "description": "UPI/Paytm FROM ClientName Ref: 123456"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 1000,
+    "description": "DIVIDEND CREDIT- Reliance Industries Ltd"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 500,
+    "description": "IMPS TRANSFER FROM Rahul Sharma Ref: 876543"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 824.75,
+    "description": "POS PURCHASE Big Bazaar Mumbai"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 1199,
+    "description": "UPI Payment BookMyShow Ref: BMS2025"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 1523.6,
+    "description": "BILLPAY Electricity TATA Power"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 299,
+    "description": "AUTO-DEBIT Netflix.com Mumbai"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 398.5,
+    "description": "Fuel Purchase HP Petrol Pump"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 1187,
+    "description": "UPI Payment Apollo Pharmacy"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 5000,
+    "description": "UPI/GooglePay FROM Freelancer Client Ref: 445566"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 2000,
+    "description": "CASHBACK CREDIT - Amazon Pay"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 1500,
+    "description": "INTEREST CREDIT - Fixed Deposit HDFC"
+  },
+  {
+    "type": "CREDIT",
+    "amount": 800,
+    "description": "RENT RECEIVED FROM Ramesh Kumar"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 245.5,
+    "description": "UPI Payment Zomato Order #998877"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 365.0,
+    "description": "UPI Payment Swiggy Instamart Order"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 680,
+    "description": "Uber Trip Mumbai Airport"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 120,
+    "description": "Mumbai Metro Smart Card Recharge"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 2500,
+    "description": "POS Purchase Amazon Retail Store"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 999,
+    "description": "Spotify Premium Subscription"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 199,
+    "description": "Apple iCloud Storage Subscription"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 650,
+    "description": "IRCTC Train Ticket Mumbai to Pune"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 420,
+    "description": "Recharge Airtel Prepaid Mobile"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 2300,
+    "description": "Insurance Premium LIC"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 11000,
+    "description": "HDFC Home Loan EMI"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 480,
+    "description": "Fuel Purchase IndianOil Petrol Pump"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 700,
+    "description": "Clinic Consultation Dr. Sharma"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 1500,
+    "description": "Shopping Flipkart Electronics Sale"
+  },
+  {
+    "type": "DEBIT",
+    "amount": 2200,
+    "description": "BookMyShow Avengers Premiere"
+  }
 ]

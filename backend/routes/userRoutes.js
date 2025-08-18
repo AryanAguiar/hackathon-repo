@@ -1,5 +1,5 @@
 import express from "express";
-import { registerUser, loginUser, addAccount } from "../controllers/userController.js";
+import { registerUser, loginUser, addAccount, deleteUser } from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -9,5 +9,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 router.post("/:id/accounts", addAccount);
+
+router.delete("/:id/delete-user", deleteUser);
 
 export default router;
