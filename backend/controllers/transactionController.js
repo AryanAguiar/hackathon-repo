@@ -1,5 +1,5 @@
 import Transaction from "../models/Transaction.js";
-import { syncTransactions } from "../utils/syncTransactions.js"; hi
+import { syncTransactions } from "../utils/syncTransactions.js";
 
 //@desc get all transactions for logged in user
 export const getTransactions = async (req, res) => {
