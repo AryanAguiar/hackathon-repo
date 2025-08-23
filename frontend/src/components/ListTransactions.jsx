@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { fetchTransactions } from '../services/api';
 import moment from 'moment';
+import TransactionsFilter from './TransactionFilter';
 
-const ListTransactions = ({refreshTransactions}) => {
+const ListTransactions = ({ refreshTransactions }) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -26,6 +27,7 @@ const ListTransactions = ({refreshTransactions}) => {
 
     return (
         <div className="p-4">
+            <TransactionsFilter setTransactions={setTransactions}/>
             <h2 className="text-xl font-bold mb-4">Transactions</h2>
             {transactions.length === 0 ? (
                 <p>No transactions found.</p>
@@ -40,6 +42,7 @@ const ListTransactions = ({refreshTransactions}) => {
                             <th className="border px-4 py-2">Category</th>
                             <th className="border px-4 py-2">Amount</th>
                             <th className="border px-4 py-2">Description</th>
+                            <th className="border px-4 py-2">Balance</th>
                             <th className="border px-4 py-2">Date</th>
                         </tr>
                     </thead>
@@ -53,6 +56,7 @@ const ListTransactions = ({refreshTransactions}) => {
                                 <td className="border px-4 py-2">{tx.category}</td>
                                 <td className="border px-4 py-2">{tx.amount}</td>
                                 <td className="border px-4 py-2">{tx.description}</td>
+                                <td className="border px-4 py-2">{tx.balanceAfter}</td>
                                 <td className="border px-4 py-2">{moment(tx.date).format("DD/MM/YYYY HH:mm")}</td>
                             </tr>
                         ))}
