@@ -53,7 +53,7 @@ const ListTransactions = ({refreshTransactions}) => {
                                 <td className="border px-4 py-2">{tx.category}</td>
                                 <td className="border px-4 py-2">{tx.amount}</td>
                                 <td className="border px-4 py-2">{tx.description}</td>
-                                <td className="border px-4 py-2">{moment(tx.date.$date).format("DD/MM/YYYY HH:mm")}</td>
+                                <td className="border px-4 py-2">{moment(tx.date).format("DD/MM/YYYY HH:mm")}</td>
                             </tr>
                         ))}
                     </tbody>

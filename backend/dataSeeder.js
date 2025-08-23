@@ -23,9 +23,7 @@ export async function seedTransactionsForUser(user) {
                     transactionId: uuidv4(),
                     user: user._id,
                     accountId: account.accountId,
-                    date: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
-                    createdAt: new Date(),
-                    updatedAt: new Date()
+                    date: new Date(Date.now() - Math.floor(Math.random() * 30 * 24 * 60 * 60 * 1000)),
                 });
             }
 
