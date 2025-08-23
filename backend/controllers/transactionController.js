@@ -5,10 +5,42 @@ import { syncTransactions } from "../utils/syncTransactions.js";
 //@desc get all transactions for logged in user
 export const getTransactions = async (req, res) => {
     try {
+        const { range, start, end } = req.query;
+        const today = new Date();
+        let startDate = null;
+        let endDate = today;
+
+        if (range) {
+            switch (range) {
+                case "weekly":
+                    startDate = new Date();
+                    startDate.setDate(today.getDate() - 7);
+                    break;
+                case "monthly":
+                    startDate = new Date();
+                    startDate.setMonth(today.getMonth() - 1);
+                    break;
+                case "quarterly":
+                    startDate = new Date();
+                    startDate.setMonth(today.getMonth() - 3);
+                    break;
+                default:
+                    break;
+            }
+        } else if (start && end) {
+            startDate = new Date(start);
+            endDate = new Date(end);
+        }
+
+        let dateMatch = {};
+        if (startDate) {
+            dateMatch = { date: { $gte: startDate, $lte: endDate } };
+        }
+
         //find all transactions
         const transactions = await Transaction.aggregate([
             {
-                $match: { user: new mongoose.Types.ObjectId(req.user._id) } //onl gets data from logged in user
+                $match: { user: new mongoose.Types.ObjectId(req.user._id), ...dateMatch } //onl gets data from logged in user
             },
             {
                 $lookup: {

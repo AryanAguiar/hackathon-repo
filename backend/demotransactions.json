@@ -1,18 +1,8 @@
 [
   {
     "type": "CREDIT",
-    "amount": 50000,
-    "description": "NEFT-SALARY AUG 2025 HDFC BANK LTD"
-  },
-  {
-    "type": "CREDIT",
     "amount": 2500,
     "description": "UPI/Paytm FROM ClientName Ref: 123456"
-  },
-  {
-    "type": "CREDIT",
-    "amount": 1000,
-    "description": "DIVIDEND CREDIT- Reliance Industries Ltd"
   },
   {
     "type": "CREDIT",
@@ -56,17 +46,12 @@
   },
   {
     "type": "CREDIT",
-    "amount": 2000,
+    "amount": 10,
     "description": "CASHBACK CREDIT - Amazon Pay"
   },
   {
     "type": "CREDIT",
-    "amount": 1500,
-    "description": "INTEREST CREDIT - Fixed Deposit HDFC"
-  },
-  {
-    "type": "CREDIT",
-    "amount": 800,
+    "amount": 8000,
     "description": "RENT RECEIVED FROM Ramesh Kumar"
   },
   {

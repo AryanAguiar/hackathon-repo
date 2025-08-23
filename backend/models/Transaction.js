@@ -41,6 +41,8 @@ const transactionSchema = new mongoose.Schema(
             trim: true,
         },
 
+        balanceAfter: { type: Number },
+
         date: {
             type: Date,
             required: true,  
