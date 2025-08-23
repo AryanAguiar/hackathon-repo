@@ -31,7 +31,7 @@ export const registerUser = async (req, res) => {
             name, email, password, accounts: accounts || []
         });
 
-        await seedTransactionsForUser(newUser);
+        // await seedTransactionsForUser(newUser);
 
         //generate jwt
         const token = jwt.sign(
@@ -93,33 +93,86 @@ export const loginUser = async (req, res) => {
     }
 };
 
+//@desc get user
+export const getUser = async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(" ")[1];
+        if (!token) return res.status(401).json({ message: "No token" });
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id).select("-password");
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        res.json(user);
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+}
+
 //@desc add account
+// export const addAccount = async (req, res) => {
+//     try {
+//         const { id } = req.params;
+//         const { accountId, bankName, accountType, balance } = req.body;
+
+//         if (!accountId || !bankName) {
+//             return res.status(400).json({ message: "accountId and bankName are required" });
+//         }
+
+
+//         // find user
+//         const user = await User.findById(id);
+//         if (!user) {
+//             return res.status(404).json({ message: "User not found" });
+//         }
+
+//         // push new account
+//         const newAccount = {
+//             accountId,
+//             bankName,
+//             accountType,
+//             balance: balance || 0
+//         };
+//         user.accounts.push(newAccount);
+
+//         await user.save();
+//         await seedTransactionsForUser(user, newAccount.accountId);
+
+//         res.status(201).json({ message: "Account added successfully", accounts: user.accounts });
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// }
+
 export const addAccount = async (req, res) => {
     try {
         const { id } = req.params;
-        const { accountId, bankName, accountType, balance } = req.body;
+        const { bankName, mobile, accountType } = req.body;
 
-        if (!accountId || !bankName) {
-            return res.status(400).json({ message: "accountId and bankName are required" });
-        }
-
-
-        // find user
         const user = await User.findById(id);
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
+        if (!user) return res.status(404).json({ message: "User not found" });
 
-        // push new account
+        //generate random account no
+        const accountId = Math.floor(100000000 + Math.random() * 9000000000).toString();
+
+        //generate random balance
+        const balance = Math.floor(Math.random() * (100000 - 10000) + 10000)
+
+        //generate random IFSC number
+        const ifsc = bankName.slice(0, 4).toUpperCase() + Math.floor(1 + Math.random() * 9999999).toString();
+
+        //push to account
         const newAccount = {
-            accountId,
             bankName,
+            accountId, //accountNo same thing
+            ifsc,
+            balance,
             accountType,
-            balance: balance || 0
-        };
+            mobile
+        }
         user.accounts.push(newAccount);
-
         await user.save();
+        await seedTransactionsForUser(user, newAccount.accountId);
 
         res.status(201).json({ message: "Account added successfully", accounts: user.accounts });
     } catch (error) {

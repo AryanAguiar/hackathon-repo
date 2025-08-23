@@ -10,7 +10,7 @@ export async function seedTransactionsForUser(user) {
     try {
         for (const account of user.accounts) {
             const count = await Transaction.countDocuments({ user: user._id, accountId: account.accountId });
-            if (count > 0) continue; // skip if transactions exist
+            if (count > 0) continue; 
 
             const transactionsToInsert = [];
             for (let i = 0; i < 50; i++) {

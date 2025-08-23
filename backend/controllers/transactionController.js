@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Transaction from "../models/Transaction.js";
 import { syncTransactions } from "../utils/syncTransactions.js";
 
@@ -5,7 +6,39 @@ import { syncTransactions } from "../utils/syncTransactions.js";
 export const getTransactions = async (req, res) => {
     try {
         //find all transactions
-        const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
+        const transactions = await Transaction.aggregate([
+            {
+                $match: { user: new mongoose.Types.ObjectId(req.user._id) } //onl gets data from logged in user
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id",
+                    as: "userData"
+                }
+            },
+            { $unwind: "$userData" },
+            {
+                $addFields: {
+                    account: {
+                        $arrayElemAt: [
+                            {
+                                $filter: {
+                                    input: "$userData.accounts",
+                                    as: "acc",
+                                    cond: { $eq: ["$$acc.accountId", "$accountId"] }
+                                }
+                            },
+                            0
+                        ]
+                    }
+                }
+            },
+            { $project: { userData: 0 } }, // remove extra user data
+            { $sort: { date: -1 } }
+        ])
+        // const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
         res.status(200).json(transactions);
     } catch (error) {
         res.status(500).json({ message: error.message });
