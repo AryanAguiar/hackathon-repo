@@ -1,5 +1,4 @@
-// demoSeeder.js
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
 import Transaction from "./models/Transaction.js";
 import { categoriseTransactions } from "./utils/categoriseTransactions.js";
@@ -9,6 +8,18 @@ const templateTransactions = JSON.parse(fs.readFileSync("./demoTransactions.json
 
 function randomDateBetween(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+function generateTxn() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let length = 6;
+    let prefix = "";
+    for (let i = 0; i < length; i++) {
+        prefix += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    const body = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return prefix + body;
 }
 
 function getSalaryDates(monthsBack = 3) {
@@ -41,14 +52,14 @@ export async function seedTransactionsForUser(user, startingBalance) {
             let balance = account.balance || startingBalance;
             let transactionsToInsert = [];
 
-            // --- Step 1. Salary credits ---
+            //Salary credits
             const salaryAmount = Math.floor(30000 + Math.random() * 20000); // 30k–50k
             const salaryDates = getSalaryDates(3);
 
             salaryDates.forEach(date => {
                 balance += salaryAmount;
                 transactionsToInsert.push({
-                    transactionId: uuidv4(),
+                    transactionId: generateTxn(),
                     type: "CREDIT",
                     description: "Monthly Salary",
                     amount: salaryAmount,
@@ -60,7 +71,7 @@ export async function seedTransactionsForUser(user, startingBalance) {
                 });
             });
 
-            // --- Step 2. Recurring fixed expenses ---
+            //Recurring fixed expenses
             salaryDates.forEach(date => {
                 const year = date.getFullYear();
                 const month = date.getMonth();
@@ -69,7 +80,7 @@ export async function seedTransactionsForUser(user, startingBalance) {
                     const expDate = new Date(year, month, exp.day, 12, 0, 0);
                     balance -= exp.amount;
                     transactionsToInsert.push({
-                        transactionId: uuidv4(),
+                        transactionId: generateTxn(),
                         type: "DEBIT",
                         description: exp.description,
                         amount: exp.amount,
@@ -82,12 +93,12 @@ export async function seedTransactionsForUser(user, startingBalance) {
                 });
             });
 
-            // --- Step 3. Random daily transactions between salaries ---
+            //Random daily transactions between salaries
             for (let i = 0; i < salaryDates.length; i++) {
                 const start = salaryDates[i];
                 const end = i === 0 ? new Date() : salaryDates[i - 1];
 
-                for (let j = 0; j < 8; j++) { // ~8 random transactions per month
+                for (let j = 0; j < 8; j++) { // 8 random transactions per month
                     const template = templateTransactions[Math.floor(Math.random() * templateTransactions.length)];
                     const category = categoriseTransactions(template.description, template.type);
                     const date = randomDateBetween(start, end);
@@ -101,7 +112,7 @@ export async function seedTransactionsForUser(user, startingBalance) {
                     transactionsToInsert.push({
                         ...template,
                         category,
-                        transactionId: uuidv4(),
+                        transactionId: generateTxn(),
                         user: user._id,
                         accountId: account.accountId,
                         date,
@@ -110,7 +121,7 @@ export async function seedTransactionsForUser(user, startingBalance) {
                 }
             }
 
-            // --- Step 4. Sort chronologically & insert ---
+            //Sort chronologically and insert
             transactionsToInsert.sort((a, b) => a.date - b.date);
 
             await User.updateOne(
