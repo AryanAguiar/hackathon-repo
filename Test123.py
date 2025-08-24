@@ -1,11 +1,5 @@
-"""
-Ultra Simple LoanSage Demo - No external dependencies
-Perfect for MumbaiHacks 2025 demonstration
-"""
-
 class SimpleFinancialHealthAnalyzer:
     def calculate_score(self, income, expenses, existing_loans, credit_score, assets):
-        # Simple calculation without complex math
         debt_ratio = min(existing_loans / max(income, 1), 1)
         savings = max(income - expenses, 0) / max(income, 1)
         
@@ -77,8 +71,6 @@ def main():
         'credit_score': 720,
         'assets': 500000
     }
-    
-    # Financial health assessment
     print("📊 FINANCIAL HEALTH ANALYSIS")
     print("-" * 30)
     health = analyzer.get_health_assessment(user_data)
@@ -86,8 +78,6 @@ def main():
     print(f"Category: {health['category'].upper()}")
     print(f"Assessment: {health['message']}")
     print()
-    
-    # Loan recommendations
     print("🏦 LOAN RECOMMENDATIONS")
     print("-" * 30)
     loan_type = "Home"
@@ -106,8 +96,6 @@ def main():
     else:
         print("No eligible loans found for your profile")
     print()
-    
-    # Financial tips
     print("💡 FINANCIAL TIPS")
     print("-" * 30)
     tips = [
