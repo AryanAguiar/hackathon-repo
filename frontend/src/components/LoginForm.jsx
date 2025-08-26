@@ -21,9 +21,9 @@ const LoginForm = () => {
     };
 
     return (
-        <div className='flex bg-violet-500 items-center w-screen'>
+        <div className='flex bg-black items-center w-screen'>
 
-            <div className="flex flex-col items-center justify-center min-h-screen w-125 bg-black ">
+            <div className="flex flex-col items-center justify-center min-h-screen w-125 bg-violet-900 opacity-90">
                 <h2 className={"text-7xl font-bold pb-8"}>Login</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col space-y-4 ">
                     <input
@@ -45,7 +45,7 @@ const LoginForm = () => {
                     />
 
                     <button type="submit"
-                        className='bg-violet-700 hover:bg-violet-900 text-white font-bold py-2 px-4 my-4 rounded'>Login</button>
+                        className='bg-violet-500 hover:bg-black text-white font-bold py-2 px-4 my-4 rounded'>Login</button>
                 </form>
 
                 {error && <p style={{ color: "red" }}>{error}</p>}
@@ -55,6 +55,12 @@ const LoginForm = () => {
                 </p>
             </div>
 
+        <div className="flex flex-col items-center justify-center min-h-screen w-[75%] lg:flex hidden">
+            <h1 className={"text-7xl font-bold pb-8"}>Welcome User!</h1>
+            <img src="https://i.pinimg.com/736x/ce/79/ab/ce79ab9a5bb8b2873ad469b0972c1995.jpg" 
+            className='h-170 w-220 object-cover rounded-4xl ' 
+            alt="" />
+        </div>
 
         </div>
 
