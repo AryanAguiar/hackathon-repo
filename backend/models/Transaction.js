@@ -22,7 +22,7 @@ const transactionSchema = new mongoose.Schema(
 
         type: {
             type: String,
-            enum: ["income", "expense", "transfer", "investment", "loan", "subscription"],
+            enum: ["CREDIT", "DEBIT"],
             required: true,
         },
 
@@ -40,6 +40,8 @@ const transactionSchema = new mongoose.Schema(
             type: String,
             trim: true,
         },
+
+        balanceAfter: { type: Number },
 
         date: {
             type: Date,

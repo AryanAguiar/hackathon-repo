@@ -13,11 +13,19 @@ const userSchema = new mongoose.Schema(
 
         accounts: [
             {
-                accountId: { type: String, required: true }, // e.g. "acc_123"
-                bankName: { type: String },                  // optional - "Chase", "HDFC"
+                //old
+                // accountId: { type: String, required: true }, // e.g. "acc_123"
+                // bankName: { type: String },                  // optional - "Chase", "HDFC"
+                // accountType: { type: String, enum: ["checking", "savings", "credit"], default: "checking" },
+                // balance: { type: Number, default: 0 },       // you can keep this in sync from transactions
+                // createdAt: { type: Date, default: Date.now }
+
+                bankName: { type: String, required: true },
+                accountId: { type: String, required: true }, //accountNo
+                ifsc: { type: String, required: true },
+                balance: { type: Number, required: true },
                 accountType: { type: String, enum: ["checking", "savings", "credit"], default: "checking" },
-                balance: { type: Number, default: 0 },       // you can keep this in sync from transactions
-                createdAt: { type: Date, default: Date.now }
+                mobile: { type: String, required: true },
             }
         ],
 

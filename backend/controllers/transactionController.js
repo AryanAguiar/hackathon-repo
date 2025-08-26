@@ -1,11 +1,76 @@
+import mongoose from "mongoose";
 import Transaction from "../models/Transaction.js";
 import { syncTransactions } from "../utils/syncTransactions.js";
 
 //@desc get all transactions for logged in user
 export const getTransactions = async (req, res) => {
     try {
+        const { range, start, end } = req.query;
+        const today = new Date();
+        let startDate = null;
+        let endDate = today;
+
+        if (range) {
+            switch (range) {
+                case "weekly":
+                    startDate = new Date();
+                    startDate.setDate(today.getDate() - 7);
+                    break;
+                case "monthly":
+                    startDate = new Date();
+                    startDate.setMonth(today.getMonth() - 1);
+                    break;
+                case "quarterly":
+                    startDate = new Date();
+                    startDate.setMonth(today.getMonth() - 3);
+                    break;
+                default:
+                    break;
+            }
+        } else if (start && end) {
+            startDate = new Date(start);
+            endDate = new Date(end);
+        }
+
+        let dateMatch = {};
+        if (startDate) {
+            dateMatch = { date: { $gte: startDate, $lte: endDate } };
+        }
+
         //find all transactions
-        const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
+        const transactions = await Transaction.aggregate([
+            {
+                $match: { user: new mongoose.Types.ObjectId(req.user._id), ...dateMatch } //onl gets data from logged in user
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "user",
+                    foreignField: "_id",
+                    as: "userData"
+                }
+            },
+            { $unwind: "$userData" },
+            {
+                $addFields: {
+                    account: {
+                        $arrayElemAt: [
+                            {
+                                $filter: {
+                                    input: "$userData.accounts",
+                                    as: "acc",
+                                    cond: { $eq: ["$$acc.accountId", "$accountId"] }
+                                }
+                            },
+                            0
+                        ]
+                    }
+                }
+            },
+            { $project: { userData: 0 } }, // remove extra user data
+            { $sort: { date: -1 } }
+        ])
+        // const transactions = await Transaction.find({ user: req.user._id }).sort({ date: -1 });
         res.status(200).json(transactions);
     } catch (error) {
         res.status(500).json({ message: error.message });
