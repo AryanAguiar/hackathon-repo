@@ -14,7 +14,7 @@ const TransactionsFilter = ({ setTransactions }) => {
   };
 
   return (
-    <select value={filter} onChange={handleChange}>
+    <select value={filter} onChange={handleChange} className="bg-gray-900 border border-gray-300 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 my-4" >
       <option value="">All</option>
       <option value="weekly">Last 7 Days</option>
       <option value="monthly">Last 30 Days</option>

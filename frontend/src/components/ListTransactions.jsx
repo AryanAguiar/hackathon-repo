@@ -26,15 +26,16 @@ const ListTransactions = ({ refreshTransactions }) => {
     if (loading) return <p>Loading Transactions...</p>;
 
     return (
-        <div className="p-4">
+        <div className="p-4 text-xl">
             <TransactionsFilter setTransactions={setTransactions}/>
             <h2 className="text-xl font-bold mb-4">Transactions</h2>
             {transactions.length === 0 ? (
                 <p>No transactions found.</p>
             ) : (
-                <table className="table-auto w-full border-collapse border border-gray-300">
+                <table className="table-auto w-full border-collapse border-2
+                 border-gray-700 bg-gradient-to-bl from-cyan-600 to-gray-900 ">
                     <thead>
-                        <tr className="bg-gray-100">
+                        <tr className="bg-black text-cyan-400 ">
                             <th className="border px-4 py-2">Bank Name</th>
                             <th className="border px-4 py-2">Account ID</th>
                             <th className="border px-4 py-2">Transaction ID</th>
@@ -48,7 +49,7 @@ const ListTransactions = ({ refreshTransactions }) => {
                     </thead>
                     <tbody>
                         {transactions.map((tx) => (
-                            <tr key={tx._id.$oid}>
+                            <tr key={tx._id.$oid} >
                                 <td className="border px-4 py-2">{tx.account.bankName}</td>
                                 <td className="border px-4 py-2">{tx.accountId}</td>
                                 <td className="border px-4 py-2">{tx.transactionId}</td>
