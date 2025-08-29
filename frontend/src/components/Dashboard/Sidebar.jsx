@@ -1,6 +1,7 @@
 import { AiFillRedditCircle } from "react-icons/ai";
 import { AiFillTool } from "react-icons/ai";
-
+import { IoPieChartSharp } from "react-icons/io5";
+import { IoBarChartSharp } from "react-icons/io5";
 function Sidebar() {
     return (
         <div className="fixed top-0 left-0 h-screen w-20 m-0 z-1
@@ -8,6 +9,7 @@ function Sidebar() {
          sm:flex hidden">
             <SidebarIcon icon={<AiFillRedditCircle />} />
             <SidebarIcon icon={<AiFillTool />} />
+            <SidebarIcon icon={<IoBarChartSharp />} />
         </div>
     )
 }

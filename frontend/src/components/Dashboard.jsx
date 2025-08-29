@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addAccount, deleteUser, getUser } from '../services/api';
 import ListTransactions from './ListTransactions';
+
+
+// IMPORTS
 import Sidebar from './Dashboard/Sidebar';
 import Example from './Dashboard/Example';
+import ChartsPie from './Charts/ChartsPie';
+import ColorThemes from './Charts/ColorThemes';
+
 
 // MENU
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
@@ -138,7 +144,9 @@ const Dashboard = () => {
         <h1 className='text-6xl font-bold'>Welcome, {user.name}</h1>
         <p>{user.email}</p>
 
-        <div className='flex flex-col bg-gradient-to-br from-cyan-500 to-blue-500 rounded-3xl p-10 mt-10 space-y-1.5 lg:w-180'>
+        <div className='flex flex-col bg-gradient-to-br from-cyan-500 to-blue-500 rounded-3xl p-10 mt-10 
+        drop-shadow-10xl
+        space-y-1.5 lg:w-180'>
           <h2 className='text-4xl font-bold'>Your account</h2>
           {user.accounts.length > 0 ? (
             <ul>
@@ -230,6 +238,17 @@ const Dashboard = () => {
           */}
 
           <ListTransactions refreshTransactions={refreshTransactions} />
+        </div>
+        <div className='p-15 inline-flex 
+        flex-row bg-gray-700 rounded-3xl 
+        divide-x-4 divide-gray-600
+        mt-10 space-x-1.5'>
+          <ChartsPie colors={ColorThemes.VioletTheme} />
+          <ChartsPie colors={ColorThemes.Ordinary} />
+        </div>
+         <div className='p-15 inline-flex flex-col bg-gray-700 rounded-3xl mt-10 space-y-20 w-[50%]'>
+          <ChartsPie colors={ColorThemes.rainbowBright} />
+          <ChartsPie colors={ColorThemes.cyberpunk} />
         </div>
       </div>
     </div>
