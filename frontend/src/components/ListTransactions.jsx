@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { fetchTransactions } from '../services/api';
 import moment from 'moment';
 import TransactionsFilter from './TransactionFilter';
+import { Menu, MenuButton, MenuItems, } from '@headlessui/react';
+import MenuItem from '@mui/material/MenuItem';
 
 const ListTransactions = ({ refreshTransactions }) => {
     const [transactions, setTransactions] = useState([]);
@@ -29,6 +31,19 @@ const ListTransactions = ({ refreshTransactions }) => {
         <div className="p-4 text-xl">
             <TransactionsFilter setTransactions={setTransactions}/>
             <h2 className="text-xl font-bold mb-4">Transactions</h2>
+            
+            {/*
+            <Menu as={"div"}>
+                <MenuButton>
+                    <button className='p-4 bg-amber-200 rounded-full font-bold text-amber-950'>Show Less</button>
+                </MenuButton>
+                <MenuItems anchor="">
+                    <MenuItem >
+                        
+                    </MenuItem>
+                </MenuItems>
+            </Menu>
+            */}
             {transactions.length === 0 ? (
                 <p>No transactions found.</p>
             ) : (

@@ -8,6 +8,8 @@ import ListTransactions from './ListTransactions';
 import Sidebar from './Dashboard/Sidebar';
 import Example from './Dashboard/Example';
 import ChartsPie from './Charts/ChartsPie';
+import ChartsBar from './Charts/ChartsBar';
+import ChartsLine from './Charts/ChartsLine';
 import ColorThemes from './Charts/ColorThemes';
 
 
@@ -161,7 +163,7 @@ const Dashboard = () => {
           )}
 
           <h3>Link account</h3>
-          
+
           <form onSubmit={handleAddAccount} className='mt-5 space-x-10 space-y-1.5 flex flex-col 
           justify-between text-center'>
             {/* <input
@@ -221,13 +223,13 @@ const Dashboard = () => {
           hover:bg-cyan-600 hover:text-white hover:border-white
           font-semibold'>Add Account</button>
           </form>
-          </div>
+        </div>
 
-              <div className='flex flex-col bg-gray-950/30 backdrop-blur-3xl rounded-3xl p-10 mt-10 space-y-1.5 opacity-[90%]'>
+        <div className='flex flex-col bg-gray-950/30 backdrop-blur-3xl rounded-3xl p-10 mt-10 space-y-1.5 opacity-[90%]'>
           <button onClick={refetchTransactions} className='mt-5 flex space-x-4 items-center'>
             <TfiReload />
-            <h1>Reload transactions</h1>  
-            </button>
+            <h1>Reload transactions</h1>
+          </button>
 
 
           {/* these Buttons shifted to Topbar 
@@ -239,16 +241,48 @@ const Dashboard = () => {
 
           <ListTransactions refreshTransactions={refreshTransactions} />
         </div>
+
+        {/* Charts */}
         <div className='p-15 inline-flex 
-        flex-row bg-gray-700 rounded-3xl 
-        divide-x-4 divide-gray-600
+        flex-col bg-gray-700 rounded-3xl 
+        xl:divide-x-4 divide-gray-600 xl:flex-row
         mt-10 space-x-1.5'>
           <ChartsPie colors={ColorThemes.VioletTheme} />
           <ChartsPie colors={ColorThemes.Ordinary} />
         </div>
-         <div className='p-15 inline-flex flex-col bg-gray-700 rounded-3xl mt-10 space-y-20 w-[50%]'>
-          <ChartsPie colors={ColorThemes.rainbowBright} />
+        <div className='lg:grid grid-cols-10
+        '>
+          <div className='space-y-20 col-span-5 p-15 mr-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'> 
+            <ChartsPie colors={ColorThemes.rainbowBright} />
+            <ChartsPie colors={ColorThemes.cyberpunk} />
+          </div>
+          <div className='space-y-20 col-span-5 p-15 ml-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'>
+              <ChartsPie colors={ColorThemes.rainbowBright} />
           <ChartsPie colors={ColorThemes.cyberpunk} />
+          </div>
+          <div className='space-y-20 col-span-5 p-15 mr-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'>
+              <ChartsPie colors={ColorThemes.rainbowBright} />
+          </div>
+          <div className='space-y-20 col-span-5 p-15 ml-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'>
+              <ChartsBar colors={ColorThemes.rainbowBright} />
+          </div>
+
+          <div className='space-y-20 col-span-7 p-15 mr-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'> 
+            <ChartsLine />
+          </div>
+          <div className='space-y-20 p-15 col-span-3 ml-2.5
+         bg-gray-700 rounded-3xl mt-5 justify-around'> 
+            <ChartsPie />
+          </div>
+        </div>
+
+        <div className='p-15 inline-flex flex-col bg-gray-700 rounded-3xl mt-10 space-y-20 w-[50%]'>
+          
         </div>
       </div>
     </div>
