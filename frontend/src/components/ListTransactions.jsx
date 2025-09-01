@@ -5,6 +5,9 @@ import TransactionsFilter from './TransactionFilter';
 import { Menu, MenuButton, MenuItems, } from '@headlessui/react';
 import MenuItem from '@mui/material/MenuItem';
 
+// Icons
+import { IoMdArrowDropdown } from "react-icons/io";
+
 const ListTransactions = ({ refreshTransactions }) => {
     const [transactions, setTransactions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,10 +31,11 @@ const ListTransactions = ({ refreshTransactions }) => {
     if (loading) return <p>Loading Transactions...</p>;
 
     return (
-        <div className="p-4 text-xl">
+        <div id='TableTop' className="p-4 text-xl">
             <TransactionsFilter setTransactions={setTransactions}/>
+            {/* 
             <h2 className="text-xl font-bold mb-4">Transactions</h2>
-            
+            */}
             {/*
             <Menu as={"div"}>
                 <MenuButton>
@@ -46,7 +50,11 @@ const ListTransactions = ({ refreshTransactions }) => {
             */}
             {transactions.length === 0 ? (
                 <p>No transactions found.</p>
-            ) : (
+            ) : 
+                
+            (    
+                <>
+                
                 <table className="table-auto w-full border-collapse border-2
                  border-gray-700 bg-gradient-to-bl from-cyan-600 to-gray-900 ">
                     <thead>
@@ -78,7 +86,15 @@ const ListTransactions = ({ refreshTransactions }) => {
                         ))}
                     </tbody>
                 </table>
-            )}
+                <div></div>
+                <a href='#TableTop'
+                className='
+                flex space-x-2 items-center w-fit
+                mt-7 sticky bottom-[5%] left-[100%] p-4
+                bg-amber-200 rounded-full font-bold text-amber-950 hover:bg-amber-600' ><IoMdArrowDropdown className='rotate-180' /> </a>
+            </>
+            )
+            }
         </div>
     )
 }

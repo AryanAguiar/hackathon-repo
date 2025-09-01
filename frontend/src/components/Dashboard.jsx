@@ -18,7 +18,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 
 // ICONS
 import { MdAccountCircle } from "react-icons/md";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { IoIosLogOut } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { TfiReload } from "react-icons/tfi";
@@ -70,6 +70,10 @@ const Dashboard = () => {
     bankName: "",
     mobile: "",
   });
+
+  // Toggle Display
+  const [display, setDisplay] = useState(false);
+
   const navigate = useNavigate();
   const [refreshTransactions, setRefreshTransactions] = useState(0);
   useEffect(() => {
@@ -238,8 +242,25 @@ const Dashboard = () => {
             Delete User
           </button>
           */}
+          <div>
+            <button className='mt-10 flex space-x-2 items-center' onClick={() => setDisplay(!display)}>
+              <h1 id="transactionH1">Transactions</h1>
+              {
+                display ? <IoMdArrowDropdown /> : <IoMdArrowDropdown className='rotate-180' />
+              }
+              </button>
 
-          <ListTransactions refreshTransactions={refreshTransactions} />
+
+            {
+              display ?  
+              <>
+              <ListTransactions refreshTransactions={refreshTransactions} />      
+              </>
+              : null
+           
+            }
+             
+          </div>
         </div>
 
         {/* Charts */}
