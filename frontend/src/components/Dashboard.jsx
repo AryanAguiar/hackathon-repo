@@ -31,16 +31,16 @@ function Topbar(props) {
       <div className="absolute flex items-center space-x-2 w-full bg-black z-0
         justify-end p-4 h-20 ">
         <Menu as="div" className="flex space-x-1.5 p-2 items-center flex-col
-            hover:bg-green-400 rounded-md"
+            hover:bg-green-900 rounded-md"
         >
           <MenuButton className='flex space-x-1.5 p-2 items-center
-            hover:bg-green-400 rounded-md'>
+            hover:bg-green-500 rounded-md'>
             <TopbarIcon icon={<MdAccountCircle />} />
             <h1>{props.userName}</h1>
             <TopbarIcon icon={<IoMdArrowDropdown className="size-5" />} />
           </MenuButton>
-          <MenuItems anchor="bottom" className="bg-gradient-to-b from-gray-950/70 to-gray-700/30 backdrop-blur-2xl opacity-90 rounded-2xl mt-4">
-            <MenuItem className='flex space-x-2 my-4 p-4 items-center hover:bg-green-400 rounded-md'>
+          <MenuItems anchor="bottom start" className="bg-gradient-to-b from-gray-950/70 to-gray-700/30 backdrop-blur-2xl opacity-90 rounded-xl mt-4 px-4 hover:bg-gray-900">
+            <MenuItem className='flex space-x-2 my-4 p-4 items-center hover:bg-green-500 rounded-md'>
               <button onClick={props.logoutFunc}>
                 <h1>Logout</h1> <IoIosLogOut className='size-5' />
               </button>
@@ -150,10 +150,10 @@ const Dashboard = () => {
         <h1 className='text-6xl font-bold'>Welcome, {user.name}</h1>
         <p>{user.email}</p>
 
-        <div className='flex flex-col bg-gradient-to-br from-cyan-500 to-blue-500 rounded-3xl p-10 mt-10 
+        <div className='flex flex-col bg-gradient-to-br from-pink-700 via-pink-700/30 to-red-600 backdrop-blur-3xl rounded-3xl p-10 mt-10 
         drop-shadow-10xl
         space-y-1.5 lg:w-180'>
-          <h2 className='text-4xl font-bold'>Your account</h2>
+          <h2 className='text-5xl font-bold drop-shadow-amber-500/50'>Balance: ₹{user.balance}</h2> <h2 className='text-3xl'>Your account</h2>
           {user.accounts.length > 0 ? (
             <ul>
               {user.accounts.map((acc) => {
@@ -166,9 +166,9 @@ const Dashboard = () => {
             <p className='text-2xl text-red-500'>No account linked yet!</p>
           )}
 
-          <h3>Link account</h3>
+          <h3 className='font-semibold mt-2'>Link account</h3>
 
-          <form onSubmit={handleAddAccount} className='mt-5 space-x-10 space-y-1.5 flex flex-col 
+          <form onSubmit={handleAddAccount} className='mt-5 space-x-10 space-y-4 flex flex-col 
           justify-between text-center'>
             {/* <input
           type="text"
@@ -207,7 +207,7 @@ const Dashboard = () => {
               value={newAccount.bankName}
               onChange={(e) => setNewAccount({ ...newAccount, bankName: e.target.value })}
               required
-              className='border-5 border-cyan-400 rounded-lg p-3 w-full lg:w-160 bg-black text-cyan-400'
+              className='border-1 border-gray-100 rounded-lg p-3 w-full lg:w-160 bg-black text-gray-400'
             />
 
             <label className='flex'>PIN:</label>
@@ -219,13 +219,13 @@ const Dashboard = () => {
               maxLength={10}
               pattern="\d{10}"
               required
-              className='border-5 border-cyan-400 rounded-lg p-2 w-full sm:w-80 bg-black text-cyan-400 text-center flex'
+              className='border-1 border-gray-100 rounded-lg p-2 w-full sm:w-80 bg-black text-gray-400 text-center flex'
             />
 
-            <button type="submit" className='border-5 border-cyan-400 rounded-lg p-2 w-full sm:w-80 
-          bg-cyan-400 text-black
-          hover:bg-cyan-600 hover:text-white hover:border-white
-          font-semibold'>Add Account</button>
+            <button type="submit" className='border-1 border-gray-100 rounded-lg p-2 w-full sm:w-80 
+          bg-gray-400 text-black
+          hover:bg-gray-600 hover:text-white hover:border-white
+          font-bold text-2xl uppercase'>Add Account</button>
           </form>
         </div>
 
