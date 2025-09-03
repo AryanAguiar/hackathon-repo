@@ -87,7 +87,7 @@ const ListTransactions = ({ refreshTransactions }) => {
                     </tbody>
                 </table>
                 <div></div>
-                <a href='#TableTop'
+                <a href='#transactionDiv'
                 className='
                 flex space-x-2 items-center w-fit
                 mt-7 sticky bottom-[5%] left-[100%] p-4

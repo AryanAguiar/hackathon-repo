@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/api';
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+
+
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
@@ -20,8 +25,19 @@ const LoginForm = () => {
         }
     };
 
+
+    useGSAP (() => {
+        gsap.from("#loginSidePic",{
+            y:10,
+            rotateY:10,
+             duration:.7,
+            repeat:-1,
+            yoyo: true,
+        })
+    })
+
     return (
-        <div className='flex bg-black items-center w-screen'>
+        <div className='flex bg-black items-center w-screen h-screen'>
 
             <div className="flex flex-col items-center justify-center min-h-screen w-125 bg-violet-900 opacity-90">
                 <h2 className={"text-7xl font-bold pb-8"}>Login</h2>
@@ -56,8 +72,9 @@ const LoginForm = () => {
             </div>
 
         <div className="flex flex-col items-center justify-center min-h-screen w-[75%] lg:flex hidden">
-            <h1 className={"text-7xl font-bold pb-8"}>Welcome User!</h1>
+            <h1 id='loginSideText' className={"text-7xl font-bold pb-8"}>Welcome User!</h1>
             <img src="https://i.pinimg.com/736x/ce/79/ab/ce79ab9a5bb8b2873ad469b0972c1995.jpg" 
+            id='loginSidePic'
             className='h-170 w-220 object-cover rounded-4xl ' 
             alt="" />
         </div>

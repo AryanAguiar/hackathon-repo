@@ -39,13 +39,13 @@ function Topbar(props) {
             <h1>{props.userName}</h1>
             <TopbarIcon icon={<IoMdArrowDropdown className="size-5" />} />
           </MenuButton>
-          <MenuItems anchor="bottom">
-            <MenuItem className='flex space-x-2 mt-4 p-4 items-center hover:bg-green-400 rounded-md'>
+          <MenuItems anchor="bottom" className="bg-gradient-to-b from-gray-950/70 to-gray-700/30 backdrop-blur-2xl opacity-90 rounded-2xl mt-4">
+            <MenuItem className='flex space-x-2 my-4 p-4 items-center hover:bg-green-400 rounded-md'>
               <button onClick={props.logoutFunc}>
                 <h1>Logout</h1> <IoIosLogOut className='size-5' />
               </button>
             </MenuItem>
-            <MenuItem className='flex space-x-2 mt-4 p-4 items-center hover:bg-green-400 rounded-md'>
+            <MenuItem className='flex space-x-2 my-4 p-4 items-center hover:bg-green-400 rounded-md'>
               <button onClick={props.deleteUserFunc} className='text-red-500 hover:bg-red-500 hover:text-amber-50'>
                 <h1>Delete</h1> <MdDeleteForever className='size-5' />
               </button>
@@ -72,7 +72,7 @@ const Dashboard = () => {
   });
 
   // Toggle Display
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(true);
 
   const navigate = useNavigate();
   const [refreshTransactions, setRefreshTransactions] = useState(0);
@@ -140,7 +140,7 @@ const Dashboard = () => {
   if (!user) return <h2>Loading...</h2>;
 
   return (
-    <div className='grid grid-cols-20 bg-gradient-to-br from-black to-blue-500'>
+    <div id='dashboardDiv' className='grid grid-cols-20 bg-gradient-to-br from-black to-blue-500'>
       <Sidebar />
       <Topbar userName={user.name} logoutFunc={handleLogout} deleteUserFunc={handleDeleteUser} />
       <div style={{ padding: "20px" }}
@@ -207,7 +207,7 @@ const Dashboard = () => {
               value={newAccount.bankName}
               onChange={(e) => setNewAccount({ ...newAccount, bankName: e.target.value })}
               required
-              className='border-5 border-cyan-400 rounded-lg p-3 w-80 lg:w-160 bg-black text-cyan-400'
+              className='border-5 border-cyan-400 rounded-lg p-3 w-full lg:w-160 bg-black text-cyan-400'
             />
 
             <label className='flex'>PIN:</label>
@@ -219,17 +219,20 @@ const Dashboard = () => {
               maxLength={10}
               pattern="\d{10}"
               required
-              className='border-5 border-cyan-400 rounded-lg p-2 w-80 bg-black text-cyan-400 text-center flex'
+              className='border-5 border-cyan-400 rounded-lg p-2 w-full sm:w-80 bg-black text-cyan-400 text-center flex'
             />
 
-            <button type="submit" className='border-5 border-cyan-400 rounded-lg p-2 w-80 
+            <button type="submit" className='border-5 border-cyan-400 rounded-lg p-2 w-full sm:w-80 
           bg-cyan-400 text-black
           hover:bg-cyan-600 hover:text-white hover:border-white
           font-semibold'>Add Account</button>
           </form>
         </div>
 
-        <div className='flex flex-col bg-gray-950/30 backdrop-blur-3xl rounded-3xl p-10 mt-10 space-y-1.5 opacity-[90%]'>
+        <div id='transactionDiv' 
+        className='flex flex-col 
+        w-full
+        bg-gray-950/30 backdrop-blur-3xl rounded-3xl p-10 mt-10 space-y-1.5 opacity-[90%]'>
           <button onClick={refetchTransactions} className='mt-5 flex space-x-4 items-center'>
             <TfiReload />
             <h1>Reload transactions</h1>
@@ -243,7 +246,7 @@ const Dashboard = () => {
           </button>
           */}
           <div>
-            <button className='mt-10 flex space-x-2 items-center' onClick={() => setDisplay(!display)}>
+            <button className='mt-10 flex space-x-2 items-center cursor-pointer' onClick={() => setDisplay(!display)}>
               <h1 id="transactionH1">Transactions</h1>
               {
                 display ? <IoMdArrowDropdown /> : <IoMdArrowDropdown className='rotate-180' />
@@ -271,32 +274,32 @@ const Dashboard = () => {
           <ChartsPie colors={ColorThemes.VioletTheme} />
           <ChartsPie colors={ColorThemes.Ordinary} />
         </div>
-        <div className='lg:grid grid-cols-10
-        '>
-          <div className='space-y-20 col-span-5 p-15 mr-2.5
+        <div id='Charts' className='lg:grid grid-cols-10
+        gap-x-5'>
+          <div className='space-y-20 col-span-5 p-15 
          bg-gray-700 rounded-3xl mt-5 justify-around'> 
             <ChartsPie colors={ColorThemes.rainbowBright} />
             <ChartsPie colors={ColorThemes.cyberpunk} />
           </div>
-          <div className='space-y-20 col-span-5 p-15 ml-2.5
+          <div className='space-y-20 col-span-5 p-15
          bg-gray-700 rounded-3xl mt-5 justify-around'>
               <ChartsPie colors={ColorThemes.rainbowBright} />
           <ChartsPie colors={ColorThemes.cyberpunk} />
           </div>
-          <div className='space-y-20 col-span-5 p-15 mr-2.5
+          <div className='space-y-20 col-span-5 p-15 
          bg-gray-700 rounded-3xl mt-5 justify-around'>
               <ChartsPie colors={ColorThemes.rainbowBright} />
           </div>
-          <div className='space-y-20 col-span-5 p-15 ml-2.5
+          <div className='space-y-20 col-span-5 p-15
          bg-gray-700 rounded-3xl mt-5 justify-around'>
               <ChartsBar colors={ColorThemes.rainbowBright} />
           </div>
 
-          <div className='space-y-20 col-span-7 p-15 mr-2.5
+          <div className='space-y-20 col-span-7 p-15
          bg-gray-700 rounded-3xl mt-5 justify-around'> 
             <ChartsLine />
           </div>
-          <div className='space-y-20 p-15 col-span-3 ml-2.5
+          <div className='space-y-20 p-15 col-span-3
          bg-gray-700 rounded-3xl mt-5 justify-around'> 
             <ChartsPie />
           </div>
